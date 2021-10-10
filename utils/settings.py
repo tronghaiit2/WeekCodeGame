@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 pygame.init()
 pygame.font.init()
 
@@ -9,6 +9,11 @@ ORANGE = (255, 93, 86)
 YELLOW = (255, 198, 65)
 GREEN = (167, 210, 0)
 BLUE = (58, 194, 234)
+
+ORANGE_HEAD = (186, 0, 0)
+YELLOW_HEAD = (210, 152, 18)
+GREEN_HEAD = (70, 158, 0)
+BLUE_HEAD = (22, 94, 239)
 
 FPS = 240
 
@@ -29,6 +34,6 @@ DRAW_GRID_LINES = True
 
 # Setup drawing color
 drawing_colors = [GRAY, ORANGE, YELLOW, GREEN, BLUE]
-
+drawing_colors_head = [GRAY,ORANGE_HEAD, YELLOW_HEAD, GREEN_HEAD, BLUE_HEAD]
 def get_font(size):
     return pygame.font.SysFont("comicsans", size)
