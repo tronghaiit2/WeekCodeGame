@@ -98,7 +98,7 @@ while run:
 
             try:
                 row, col = get_row_col_from_pos(pos)
-                #grid[row][col] = drawing_color
+                grid[row][col] = drawing_color
             except IndexError:
 
                 for button in buttons:
