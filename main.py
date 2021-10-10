@@ -52,10 +52,7 @@ def get_row_col_from_pos(pos):
 
     return row, col
 
-font40 = pygame.font.SysFont('Constantia', 40)
-font50 = pygame.font.SysFont('Constantia', 50)
-# countdown = 5
-# last_count = pygame.time.get_ticks()
+
 
 def gameStart():
     countdown = 5
@@ -100,7 +97,7 @@ run = True
 clock = pygame.time.Clock()
 grid = init_grid(ROWS, COLS, BG_COLOR)
 drawing_color = drawing_colors[0]
-
+pygame.draw.rect(WIN, BLACK, (100, HEIGHT - TOOLBAR_HEIGHT/2 - 25, 50, 50), 2)
 #Init buttons
 button_y = HEIGHT - TOOLBAR_HEIGHT/2 - 25
 buttons = [
@@ -157,10 +154,20 @@ players = [
 ]
 draw_buttons(WIN, buttons)
 
+def draw_time():
+    pygame.draw.rect(WIN, BLACK, (990, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 150, 50), 2)
+    font = pygame.font.SysFont('consolas', 20)
+    timeSurface = font.render('Time: ', True, (0, 0, 0))
+    WIN.blit(timeSurface, (1000, HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
+draw_time()
 gameStart()
 
 while run:
     clock.tick(FPS)
+    # pygame.draw.rect(WIN, BLACK, (990, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 150, 50), 2)
+    # font = pygame.font.SysFont('consolas', 20)
+    # timeSurface = font.render('Time: ', True, (0, 0, 0))
+    # WIN.blit(timeSurface, (1000, HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -285,6 +292,7 @@ while run:
                             Player(P4_pos_x, P4_pos_y, 1, drawing_colors[4], drawing_colors_head[4]),
                         ]
                         draw_buttons(WIN, buttons)
+                        draw_time()
                     #
                     #
                     # #P1
