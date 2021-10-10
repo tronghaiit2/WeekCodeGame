@@ -85,11 +85,6 @@ buttons = [
     Button(1370, 530, 40, 40, BLUE, "R4", BLACK),
 ]
 
-# Draw by keyboard
-pos_x = 18;
-pos_y = 9;
-grid[pos_y][pos_x] = drawing_colors[0]
-
 # Setup player P1
 P1_pos_x = 0;
 P1_pos_y = 0;
@@ -128,18 +123,64 @@ while run:
 
         # Draw by keyboard
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_DOWN] and pos_y  + 1 < ROWS:
-            pos_y +=  1;
-            grid[pos_y][pos_x] = drawing_color
-        elif keys[pygame.K_UP] and pos_y > 0:
-            pos_y -=  1;
-            grid[pos_y][pos_x] = drawing_color
-        elif keys[pygame.K_RIGHT] and pos_x + 1 < COLS:
-            pos_x +=  1;
-            grid[pos_y][pos_x] = drawing_color
-        elif keys[pygame.K_LEFT] and pos_x > 0:
-            pos_x -=  1;
-            grid[pos_y][pos_x] = drawing_color
+
+        #P1
+        if keys[pygame.K_s] and P1_pos_y + 1 < ROWS:
+            P1_pos_y +=  1;
+#            for i in range(5):
+#                if(grid[P1_pos_y][P1_pos_x] == drawing_colors[i]) count[i] -= 1
+            grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
+        elif keys[pygame.K_w] and P1_pos_y > 0:
+            P1_pos_y -=  1;
+            grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
+        elif keys[pygame.K_d] and P1_pos_x + 1 < COLS:
+            P1_pos_x +=  1;
+            grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
+        elif keys[pygame.K_a] and P1_pos_x > 0:
+            P1_pos_x -=  1;
+            grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
+
+        #P2
+        if keys[pygame.K_g] and P2_pos_y + 1 < ROWS:
+            P2_pos_y +=  1;
+            grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
+        elif keys[pygame.K_t] and P2_pos_y > 0:
+            P2_pos_y -=  1;
+            grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
+        elif keys[pygame.K_h] and P2_pos_x + 1 < COLS:
+            P2_pos_x +=  1;
+            grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
+        elif keys[pygame.K_f] and P2_pos_x > 0:
+            P2_pos_x -=  1;
+            grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
+
+        #P3
+        if keys[pygame.K_k] and P3_pos_y + 1 < ROWS:
+            P3_pos_y +=  1;
+            grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
+        elif keys[pygame.K_i] and P3_pos_y > 0:
+            P3_pos_y -=  1;
+            grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
+        elif keys[pygame.K_l] and P3_pos_x + 1 < COLS:
+            P3_pos_x +=  1;
+            grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
+        elif keys[pygame.K_j] and P3_pos_x > 0:
+            P3_pos_x -=  1;
+            grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
+
+        #P4
+        if keys[pygame.K_DOWN] and P4_pos_y + 1 < ROWS:
+            P4_pos_y +=  1;
+            grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
+        elif keys[pygame.K_UP] and P4_pos_y > 0:
+            P4_pos_y -=  1;
+            grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
+        elif keys[pygame.K_RIGHT] and P4_pos_x + 1 < COLS:
+            P4_pos_x +=  1;
+            grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
+        elif keys[pygame.K_LEFT] and P4_pos_x > 0:
+            P4_pos_x -=  1;
+            grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
 
         if pygame.mouse.get_pressed()[0]:
             pos = pygame.mouse.get_pos()
@@ -158,10 +199,6 @@ while run:
                     if button.text == "Clear":
                         grid = init_grid(ROWS, COLS, BG_COLOR)
                         drawing_color = drawing_colors[0]
-                        # Draw by keyboard
-                        pos_x = 18;
-                        pos_y = 9;
-                        grid[pos_y][pos_x] = drawing_colors[0]
 
                         # Setup player P1
                         P1_pos_x = 0;
