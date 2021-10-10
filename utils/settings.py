@@ -30,7 +30,7 @@ PIXEL_SIZE = 30
 BG_COLOR = WHITE
 
 DRAW_GRID_LINES = True
-
+timeDefault = 30
 
 # Setup drawing color
 drawing_colors = [GRAY, ORANGE, YELLOW, GREEN, BLUE]

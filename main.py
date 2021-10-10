@@ -1,3 +1,5 @@
+import pygame
+
 from utils import *
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -154,23 +156,37 @@ players = [
 ]
 draw_buttons(WIN, buttons)
 
-def draw_time():
+def draw_time(time):
+    # last_count = pygame.time.get_ticks()
+    pygame.draw.rect(WIN, WHITE, (990, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 150, 50))
     pygame.draw.rect(WIN, BLACK, (990, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 150, 50), 2)
     font = pygame.font.SysFont('consolas', 20)
-    timeSurface = font.render('Time: ', True, (0, 0, 0))
+    timeSurface = font.render('Time: ' + str(time), True, (0, 0, 0))
     WIN.blit(timeSurface, (1000, HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
-draw_time()
-gameStart()
+    # count_timer = pygame.time.get_ticks()
+    # if count_timer - last_count > 1000:
+    #     time -= 1
+    #     last_count = count_timer
 
+time = timeDefault
+gameStart()
+# draw_time(time)
+last_count = pygame.time.get_ticks()
 while run:
     clock.tick(FPS)
-    # pygame.draw.rect(WIN, BLACK, (990, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 150, 50), 2)
-    # font = pygame.font.SysFont('consolas', 20)
-    # timeSurface = font.render('Time: ', True, (0, 0, 0))
-    # WIN.blit(timeSurface, (1000, HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
+
+    count_timer = pygame.time.get_ticks()
+    if count_timer - last_count > 1000:
+
+        time -= 1
+        last_count = count_timer
+        if time <= 0:
+            run = False
+    draw_time(time)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+
         # Draw by keyboard
         keys = pygame.key.get_pressed()
 
@@ -213,7 +229,7 @@ while run:
         #P3
         if keys[pygame.K_k] and P3_pos_y + 1 < ROWS:
             grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
-            P3_pos_y +=  1
+            P3_pos_y += 1
             grid[P3_pos_y][P3_pos_x] = drawing_colors_head[3]
         elif keys[pygame.K_i] and P3_pos_y > 0:
             grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
@@ -231,7 +247,7 @@ while run:
         #P4
         if keys[pygame.K_DOWN] and P4_pos_y + 1 < ROWS:
             grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
-            P4_pos_y +=  1
+            P4_pos_y += 1
             grid[P4_pos_y][P4_pos_x] = drawing_colors_head[4]
         elif keys[pygame.K_UP] and P4_pos_y > 0:
             grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
@@ -245,6 +261,7 @@ while run:
             grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
             P4_pos_x -=  1
             grid[P4_pos_y][P4_pos_x] = drawing_colors_head[4]
+
 
         if pygame.mouse.get_pressed()[0]:
             pos = pygame.mouse.get_pos()
@@ -292,7 +309,8 @@ while run:
                             Player(P4_pos_x, P4_pos_y, 1, drawing_colors[4], drawing_colors_head[4]),
                         ]
                         draw_buttons(WIN, buttons)
-                        draw_time()
+                        draw_time(timeDefault)
+        # draw_time(time)
                     #
                     #
                     # #P1
