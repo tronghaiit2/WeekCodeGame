@@ -57,6 +57,7 @@ clock = pygame.time.Clock()
 grid = init_grid(ROWS, COLS, BG_COLOR)
 drawing_color = drawing_colors[0]
 
+#Init buttons
 button_y = HEIGHT - TOOLBAR_HEIGHT/2 - 25
 buttons = [
     Button(210, button_y, 50, 50, ORANGE),
@@ -107,6 +108,14 @@ grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
 P4_pos_x = COLS - 1;
 P4_pos_y = ROWS - 1;
 grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
+
+#Init 4 players
+players = [
+    Player(P1_pos_x, P1_pos_y, 1, drawing_colors[1]),
+    Player(P2_pos_x, P2_pos_y, 1, drawing_colors[2]),
+    Player(P3_pos_x, P3_pos_y, 1, drawing_colors[3]),
+    Player(P4_pos_x, P4_pos_y, 1, drawing_colors[4]),
+]
 
 while run:
     clock.tick(FPS)
