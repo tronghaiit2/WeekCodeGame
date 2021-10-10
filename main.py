@@ -56,8 +56,8 @@ def get_row_col_from_pos(pos):
 
 
 
-def gameStart():
-    countdown = 5
+def gameStart(countdown):
+
     last_count = pygame.time.get_ticks()
     font = pygame.font.SysFont('consolas', 60)
     headingSuface = font.render('Game Start', True, (255, 0, 0))
@@ -94,20 +94,24 @@ def gameStart():
         pygame.display.update()
         clock.tick(FPS)
 
-
+Score = {
+    "Player 1": 0,
+    "Player 2": 0,
+    "Player 3": 0,
+    "Player 4": 0
+}
 run = True
 clock = pygame.time.Clock()
 grid = init_grid(ROWS, COLS, BG_COLOR)
 drawing_color = drawing_colors[0]
-pygame.draw.rect(WIN, BLACK, (100, HEIGHT - TOOLBAR_HEIGHT/2 - 25, 50, 50), 2)
-#Init buttons
+
+# Init buttons
 button_y = HEIGHT - TOOLBAR_HEIGHT/2 - 25
 buttons = [
     Button(180, button_y, 50, 50, ORANGE, "P1"),
     Button(390, button_y, 50, 50, YELLOW, "P2"),
     Button(600, button_y, 50, 50, GREEN, "P3"),
     Button(810, button_y, 50, 50, BLUE, "P4"),
-    # Button(1080, button_y, 50, 50, WHITE, "Erase", BLACK),
     Button(1180, button_y, 50, 50, WHITE, "Clear", BLACK),
     Button(70, 30, 40, 40, ORANGE, "U1", BLACK),
     Button(70, 110, 40, 40, ORANGE, "D1", BLACK),
@@ -156,6 +160,7 @@ players = [
 ]
 draw_buttons(WIN, buttons)
 
+# Draw the Timer
 def draw_time(time):
     # last_count = pygame.time.get_ticks()
     pygame.draw.rect(WIN, WHITE, (990, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 150, 50))
@@ -168,21 +173,111 @@ def draw_time(time):
     #     time -= 1
     #     last_count = count_timer
 
+# Set the current time = default (30s)
 time = timeDefault
-gameStart()
-# draw_time(time)
+
+def draw_score(Score):
+    font = pygame.font.SysFont('consolas', 20)
+
+    # Player 1
+    pygame.draw.rect(WIN, WHITE, (230, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50))
+    pygame.draw.rect(WIN, BLACK, (230, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50), 2)
+    ScoreSurface = font.render(str(Score["Player 1"]+1), True, drawing_colors[1])
+    scoreSize =  ScoreSurface.get_size()
+    WIN.blit(ScoreSurface, (230+ int((50-scoreSize[0])/2), HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
+
+    # Player 2
+    pygame.draw.rect(WIN, WHITE, (440, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50))
+    pygame.draw.rect(WIN, BLACK, (440, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50), 2)
+    ScoreSurface = font.render(str(Score["Player 2"] + 1), True, drawing_colors[1])
+    scoreSize = ScoreSurface.get_size()
+    WIN.blit(ScoreSurface, (440 + int((50 - scoreSize[0]) / 2), HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
+
+    # Player 3
+    pygame.draw.rect(WIN, WHITE, (650, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50))
+    pygame.draw.rect(WIN, BLACK, (650, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50), 2)
+    ScoreSurface = font.render(str(Score["Player 3"] + 1), True, drawing_colors[1])
+    scoreSize = ScoreSurface.get_size()
+    WIN.blit(ScoreSurface, (650 + int((50 - scoreSize[0]) / 2), HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
+
+    #Player 4
+    pygame.draw.rect(WIN, WHITE, (860, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50))
+    pygame.draw.rect(WIN, BLACK, (860, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50), 2)
+    ScoreSurface = font.render(str(Score["Player 4"] + 1), True, drawing_colors[1])
+    scoreSize = ScoreSurface.get_size()
+    WIN.blit(ScoreSurface, (860 + int((50 - scoreSize[0]) / 2), HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
+
+def draw_announce(Score):
+    font = pygame.font.SysFont('consolas', 60)
+    headingSurface = font.render('CONGRATULATIONS!', True, (255, 0, 0))
+    headingSize = headingSurface.get_size()
+    font = pygame.font.SysFont('consolas', 80)
+
+
+    max_score = max(Score["Player 1"], Score["Player 2"], Score["Player 3"], Score["Player 4"])
+    if max_score == Score["Player 1"]:
+        congratSurface = font.render('Player 1', True, drawing_colors[1])
+    elif max_score == Score["Player 2"]:
+        congratSurface = font.render('Player 2', True, drawing_colors[2])
+    elif max_score == Score["Player 3"]:
+        congratSurface = font.render('Player 3', True, drawing_colors[3])
+    elif max_score == Score["Player 4"]:
+        congratSurface = font.render('Player 4', True, drawing_colors[4])
+    congratSize = congratSurface.get_size()
+
+    font = pygame.font.SysFont('consolas', 20)
+    commentSurface = font.render('Press "space" to replay', True, (0, 0, 0))
+    commentSize = commentSurface.get_size()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYUP:
+                if event.key == K_SPACE:
+                    return
+        WIN.blit(headingSurface, (int((WIDTH - headingSize[0]) / 2), 100))
+        WIN.blit(congratSurface, (int((WIDTH - congratSize[0]) / 2), 250))
+        WIN.blit(commentSurface, (int((WIDTH - commentSize[0]) / 2), 400))
+        pygame.display.update()
+        clock.tick(FPS)
+
+
+'''
+    ########################
+    #      GAME START      #
+    ########################
+
+'''
+
+# Start the game
+gameStart(countdown)
+
+# Take the time
 last_count = pygame.time.get_ticks()
+
 while run:
     clock.tick(FPS)
 
+    '''
+        Counting down
+    '''
     count_timer = pygame.time.get_ticks()
     if count_timer - last_count > 1000:
 
         time -= 1
         last_count = count_timer
         if time <= 0:
+            draw_announce(Score)
             run = False
     draw_time(time)
+
+    draw_score(Score)
+
+    '''
+        Take the event (press, quit, ...)
+    '''
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -190,78 +285,116 @@ while run:
         # Draw by keyboard
         keys = pygame.key.get_pressed()
 
-        #P1
+        # Player 1
         if keys[pygame.K_s] and P1_pos_y + 1 < ROWS:
             grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
             P1_pos_y +=  1
+            if grid[P1_pos_y][P1_pos_x] != drawing_colors[1]:
+                Score["Player 1"] += 1
             grid[P1_pos_y][P1_pos_x] = drawing_colors_head[1]
         elif keys[pygame.K_w] and P1_pos_y > 0:
             grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
             P1_pos_y -=  1
+            if grid[P1_pos_y][P1_pos_x] != drawing_colors[1]:
+                Score["Player 1"] += 1
             grid[P1_pos_y][P1_pos_x] = drawing_colors_head[1]
         elif keys[pygame.K_d] and P1_pos_x + 1 < COLS:
             grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
             P1_pos_x +=  1
+            if grid[P1_pos_y][P1_pos_x] != drawing_colors[1]:
+                Score["Player 1"] += 1
             grid[P1_pos_y][P1_pos_x] = drawing_colors_head[1]
         elif keys[pygame.K_a] and P1_pos_x > 0:
             grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
             P1_pos_x -=  1
+            if grid[P1_pos_y][P1_pos_x] != drawing_colors[1]:
+                Score["Player 1"] += 1
             grid[P1_pos_y][P1_pos_x] = drawing_colors_head[1]
 
-        #P2
+        # Player 2
         if keys[pygame.K_g] and P2_pos_y + 1 < ROWS:
             grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
             P2_pos_y +=  1
+            if grid[P2_pos_y][P2_pos_x] != drawing_colors[2]:
+                Score["Player 2"] += 1
             grid[P2_pos_y][P2_pos_x] = drawing_colors_head[2]
         elif keys[pygame.K_t] and P2_pos_y > 0:
             grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
             P2_pos_y -=  1
+            if grid[P2_pos_y][P2_pos_x] != drawing_colors[2]:
+                Score["Player 2"] += 1
             grid[P2_pos_y][P2_pos_x] = drawing_colors_head[2]
         elif keys[pygame.K_h] and P2_pos_x + 1 < COLS:
             grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
             P2_pos_x +=  1
+            if grid[P2_pos_y][P2_pos_x] != drawing_colors[2]:
+                Score["Player 2"] += 1
             grid[P2_pos_y][P2_pos_x] = drawing_colors_head[2]
         elif keys[pygame.K_f] and P2_pos_x > 0:
             grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
             P2_pos_x -=  1
+            if grid[P2_pos_y][P2_pos_x] != drawing_colors[2]:
+                Score["Player 2"] += 1
             grid[P2_pos_y][P2_pos_x] = drawing_colors_head[2]
 
-        #P3
+        # Player 3
         if keys[pygame.K_k] and P3_pos_y + 1 < ROWS:
             grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
             P3_pos_y += 1
+            if grid[P3_pos_y][P3_pos_x] != drawing_colors[3]:
+                Score["Player 3"] += 1
             grid[P3_pos_y][P3_pos_x] = drawing_colors_head[3]
         elif keys[pygame.K_i] and P3_pos_y > 0:
             grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
             P3_pos_y -=  1
+            if grid[P3_pos_y][P3_pos_x] != drawing_colors[3]:
+                Score["Player 3"] += 1
             grid[P3_pos_y][P3_pos_x] = drawing_colors_head[3]
         elif keys[pygame.K_l] and P3_pos_x + 1 < COLS:
             grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
             P3_pos_x +=  1
+            if grid[P3_pos_y][P3_pos_x] != drawing_colors[3]:
+                Score["Player 3"] += 1
             grid[P3_pos_y][P3_pos_x] = drawing_colors_head[3]
         elif keys[pygame.K_j] and P3_pos_x > 0:
             grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
             P3_pos_x -=  1
+            if grid[P3_pos_y][P3_pos_x] != drawing_colors[3]:
+                Score["Player 3"] += 1
             grid[P3_pos_y][P3_pos_x] = drawing_colors_head[3]
 
-        #P4
+        # Player 4
         if keys[pygame.K_DOWN] and P4_pos_y + 1 < ROWS:
             grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
             P4_pos_y += 1
+            if grid[P4_pos_y][P4_pos_x] != drawing_colors[4]:
+                Score["Player 4"] += 1
             grid[P4_pos_y][P4_pos_x] = drawing_colors_head[4]
         elif keys[pygame.K_UP] and P4_pos_y > 0:
             grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
             P4_pos_y -=  1
+            if grid[P4_pos_y][P4_pos_x] != drawing_colors[4]:
+                Score["Player 4"] += 1
             grid[P4_pos_y][P4_pos_x] = drawing_colors_head[4]
         elif keys[pygame.K_RIGHT] and P4_pos_x + 1 < COLS:
             grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
             P4_pos_x +=  1
+            if grid[P4_pos_y][P4_pos_x] != drawing_colors[4]:
+                Score["Player 4"] += 1
             grid[P4_pos_y][P4_pos_x] = drawing_colors_head[4]
         elif keys[pygame.K_LEFT] and P4_pos_x > 0:
             grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
             P4_pos_x -=  1
+            if grid[P4_pos_y][P4_pos_x] != drawing_colors[4]:
+                Score["Player 4"] += 1
             grid[P4_pos_y][P4_pos_x] = drawing_colors_head[4]
 
+        # draw_Score(Score)
+
+        '''
+            Press "Clear"
+            => Clear the board, reset the timer
+        '''
 
         if pygame.mouse.get_pressed()[0]:
             pos = pygame.mouse.get_pos()
@@ -279,7 +412,8 @@ while run:
                     drawing_color = button.color
                     if button.text == "Clear":
                         grid = init_grid(ROWS, COLS, BG_COLOR)
-
+                        time = timeDefault
+                        Score["Player 1"] = Score["Player 2"] = Score["Player 3"] = Score["Player 4"] = 0
                         drawing_color = drawing_colors[0]
                         # Setup player P1
                         P1_pos_x = 0
@@ -309,7 +443,7 @@ while run:
                             Player(P4_pos_x, P4_pos_y, 1, drawing_colors[4], drawing_colors_head[4]),
                         ]
                         draw_buttons(WIN, buttons)
-                        draw_time(timeDefault)
+
         # draw_time(time)
                     #
                     #
