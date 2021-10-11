@@ -273,7 +273,41 @@ while run:
         last_count = count_timer
         if time <= 0:
             draw_announce(Score)
-            run = False
+
+            '''
+                Reset Game
+            '''
+            grid = init_grid(ROWS, COLS, BG_COLOR)
+            time = timeDefault
+            Score["Player 1"] = Score["Player 2"] = Score["Player 3"] = Score["Player 4"] = 0
+            drawing_color = drawing_colors[0]
+            # Setup player P1
+            P1_pos_x = 0
+            P1_pos_y = 0
+            grid[P1_pos_y][P1_pos_x] = drawing_colors_head[1]
+
+            # Setup player P2
+            P2_pos_x = 0
+            P2_pos_y = ROWS - 1
+            grid[P2_pos_y][P2_pos_x] = drawing_colors_head[2]
+
+            # Setup player P3
+            P3_pos_x = COLS - 1
+            P3_pos_y = 0
+            grid[P3_pos_y][P3_pos_x] = drawing_colors_head[3]
+
+            # Setup player P4
+            P4_pos_x = COLS - 1
+            P4_pos_y = ROWS - 1
+            grid[P4_pos_y][P4_pos_x] = drawing_colors_head[4]
+
+            # Init 4 players
+            players = [
+                Player(P1_pos_x, P1_pos_y, 1, drawing_colors[1], drawing_colors_head[1]),
+                Player(P2_pos_x, P2_pos_y, 1, drawing_colors[2], drawing_colors_head[2]),
+                Player(P3_pos_x, P3_pos_y, 1, drawing_colors[3], drawing_colors_head[3]),
+                Player(P4_pos_x, P4_pos_y, 1, drawing_colors[4], drawing_colors_head[4]),
+            ]
     draw_time(time)
 
     draw_score(Score)
