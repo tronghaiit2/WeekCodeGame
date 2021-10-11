@@ -112,7 +112,7 @@ buttons = [
     Button(390, button_y, 50, 50, YELLOW, "P2"),
     Button(600, button_y, 50, 50, GREEN, "P3"),
     Button(810, button_y, 50, 50, BLUE, "P4"),
-    Button(1180, button_y, 50, 50, WHITE, "Clear", BLACK),
+    Button(1180, button_y, 50, 50, WHITE, "Clear", BLACK)
     Button(70, 30, 40, 40, ORANGE, "W", BLACK),
     Button(70, 110, 40, 40, ORANGE, "S", BLACK),
     Button(30, 70, 40, 40, ORANGE, "A", BLACK),
