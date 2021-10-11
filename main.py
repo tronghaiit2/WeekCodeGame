@@ -208,6 +208,7 @@ def draw_score(Score):
     WIN.blit(ScoreSurface, (860 + int((50 - scoreSize[0]) / 2), HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
 
 def draw_announce(Score):
+
     font = pygame.font.SysFont('consolas', 60)
     headingSurface = font.render('CONGRATULATIONS!', True, (255, 0, 0))
     headingSize = headingSurface.get_size()
@@ -224,6 +225,9 @@ def draw_announce(Score):
     elif max_score == Score["Player 4"]:
         congratSurface = font.render('Player 4', True, drawing_colors[4])
     congratSize = congratSurface.get_size()
+    pygame.draw.rect(WIN, WHITE, (int((WIDTH - congratSize[0]) / 2), 250, congratSize[0], congratSize[1]))
+    pygame.draw.rect(WIN, WHITE, (int((WIDTH - headingSize[0]) / 2), 100, headingSize[0], headingSize[1]))
+    # pygame.draw.rect(WIN, WHITE, (int((WIDTH - congratSize[0]) / 2), 250, congratSize[0], congratSize[1]))
 
     font = pygame.font.SysFont('consolas', 20)
     commentSurface = font.render('Press "space" to replay', True, (0, 0, 0))
