@@ -113,22 +113,22 @@ buttons = [
     Button(600, button_y, 50, 50, GREEN, "P3"),
     Button(810, button_y, 50, 50, BLUE, "P4"),
     Button(1180, button_y, 50, 50, WHITE, "Clear", BLACK),
-    Button(70, 30, 40, 40, ORANGE, "U1", BLACK),
-    Button(70, 110, 40, 40, ORANGE, "D1", BLACK),
-    Button(30, 70, 40, 40, ORANGE, "L1", BLACK),
-    Button(110, 70, 40, 40, ORANGE, "R1", BLACK),
-    Button(70, 490, 40, 40, YELLOW, "U2", BLACK),
-    Button(70, 570, 40, 40, YELLOW, "D2", BLACK),
-    Button(30, 530, 40, 40, YELLOW, "L2", BLACK),
-    Button(110, 530, 40, 40, YELLOW, "R2", BLACK),
-    Button(1330, 30, 40, 40, GREEN, "U3", BLACK),
-    Button(1330, 110, 40, 40, GREEN, "D3", BLACK),
-    Button(1290, 70, 40, 40, GREEN, "L3", BLACK),
-    Button(1370, 70, 40, 40, GREEN, "R3", BLACK),
-    Button(1330, 490, 40, 40, BLUE, "U4", BLACK),
-    Button(1330, 570, 40, 40, BLUE, "D4", BLACK),
-    Button(1290, 530, 40, 40, BLUE, "L4", BLACK),
-    Button(1370, 530, 40, 40, BLUE, "R4", BLACK),
+    Button(70, 30, 40, 40, ORANGE, "W", BLACK),
+    Button(70, 110, 40, 40, ORANGE, "S", BLACK),
+    Button(30, 70, 40, 40, ORANGE, "A", BLACK),
+    Button(110, 70, 40, 40, ORANGE, "D", BLACK),
+    Button(70, 490, 40, 40, YELLOW, "T", BLACK),
+    Button(70, 570, 40, 40, YELLOW, "G", BLACK),
+    Button(30, 530, 40, 40, YELLOW, "F", BLACK),
+    Button(110, 530, 40, 40, YELLOW, "H", BLACK),
+    Button(1330, 30, 40, 40, GREEN, "I", BLACK),
+    Button(1330, 110, 40, 40, GREEN, "K", BLACK),
+    Button(1290, 70, 40, 40, GREEN, "J", BLACK),
+    Button(1370, 70, 40, 40, GREEN, "L", BLACK),
+    Button(1330, 490, 40, 40, BLUE, "^", BLACK),
+    Button(1330, 570, 40, 40, BLUE, "v", BLACK),
+    Button(1290, 530, 40, 40, BLUE, "<", BLACK),
+    Button(1370, 530, 40, 40, BLUE, ">", BLACK),
 ]
 
 # Setup player P1
@@ -265,6 +265,7 @@ while run:
     '''
         Counting down
     '''
+    draw_time(time)
     count_timer = pygame.time.get_ticks()
     if count_timer - last_count > 1000:
 
@@ -307,7 +308,6 @@ while run:
                 Player(P3_pos_x, P3_pos_y, 1, drawing_colors[3], drawing_colors_head[3]),
                 Player(P4_pos_x, P4_pos_y, 1, drawing_colors[4], drawing_colors_head[4]),
             ]
-    draw_time(time)
 
     draw_score(Score)
 
@@ -484,61 +484,62 @@ while run:
         # draw_time(time)
                     #
                     #
-                    # #P1
-                    # if button.text == "D1" and P1_pos_y + 1 < ROWS:
-                    #     P1_pos_y +=  1
-                    #     grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
-                    # elif button.text == "U1" and P1_pos_y > 0:
-                    #     P1_pos_y -=  1
-                    #     grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
-                    # elif button.text == "R1" and P1_pos_x + 1 < COLS:
-                    #     P1_pos_x +=  1
-                    #     grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
-                    # elif button.text == "L1" and P1_pos_x > 0:
-                    #     P1_pos_x -=  1
-                    #     grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
-                    #
-                    # #P2
-                    # if button.text == "D2" and P2_pos_y + 1 < ROWS:
-                    #     P2_pos_y +=  1
-                    #     grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
-                    # elif button.text == "U2" and P2_pos_y > 0:
-                    #     P2_pos_y -=  1
-                    #     grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
-                    # elif button.text == "R2" and P2_pos_x + 1 < COLS:
-                    #     P2_pos_x +=  1
-                    #     grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
-                    # elif button.text == "L2" and P2_pos_x > 0:
-                    #     P2_pos_x -=  1
-                    #     grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
-                    #
-                    # #P3
-                    # if button.text == "D3" and P3_pos_y + 1 < ROWS:
-                    #     P3_pos_y +=  1
-                    #     grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
-                    # elif button.text == "U3" and P3_pos_y > 0:
-                    #     P3_pos_y -=  1
-                    #     grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
-                    # elif button.text == "R3" and P3_pos_x + 1 < COLS:
-                    #     P3_pos_x +=  1
-                    #     grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
-                    # elif button.text == "L3" and P3_pos_x > 0:
-                    #     P3_pos_x -=  1
-                    #     grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
-                    #
-                    # #P4
-                    # if button.text == "D4" and P4_pos_y + 1 < ROWS:
-                    #     P4_pos_y +=  1
-                    #     grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
-                    # elif button.text == "U4" and P4_pos_y > 0:
-                    #     P4_pos_y -=  1
-                    #     grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
-                    # elif button.text == "R4" and P4_pos_x + 1 < COLS:
-                    #     P4_pos_x +=  1
-                    #     grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
-                    # elif button.text == "L4" and P4_pos_x > 0:
-                    #     P4_pos_x -=  1
-                    #     grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
+
+                    #P1
+#                    if button.text == "S" and P1_pos_y + 1 < ROWS:
+#                        P1_pos_y +=  1;
+#                        grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
+#                    elif button.text == "W" and P1_pos_y > 0:
+#                        P1_pos_y -=  1;
+#                        grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
+#                    elif button.text == "D" and P1_pos_x + 1 < COLS:
+#                        P1_pos_x +=  1;
+#                        grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
+#                    elif button.text == "A" and P1_pos_x > 0:
+#                       P1_pos_x -=  1;
+#                        grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
+#
+#                    #P2
+#                    if button.text == "G" and P2_pos_y + 1 < ROWS:
+#                        P2_pos_y +=  1;
+#                        grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
+#                    elif button.text == "T" and P2_pos_y > 0:
+#                        P2_pos_y -=  1;
+#                       grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
+#                    elif button.text == "H" and P2_pos_x + 1 < COLS:
+#                        P2_pos_x +=  1;
+#                        grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
+#                    elif button.text == "F" and P2_pos_x > 0:
+#                        P2_pos_x -=  1;
+#                        grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
+#
+#                    #P3
+#                    if button.text == "K" and P3_pos_y + 1 < ROWS:
+#                        P3_pos_y +=  1;
+#                        grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
+#                    elif button.text == "I" and P3_pos_y > 0:
+#                        P3_pos_y -=  1;
+#                        grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
+#                    elif button.text == "L" and P3_pos_x + 1 < COLS:
+#                        P3_pos_x +=  1;
+#                        grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
+#                    elif button.text == "J" and P3_pos_x > 0:
+#                        P3_pos_x -=  1;
+#                        grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
+#
+#                    #P4
+#                    if button.text == "v" and P4_pos_y + 1 < ROWS:
+#                        P4_pos_y +=  1;
+#                        grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
+#                    elif button.text == "^" and P4_pos_y > 0:
+#                        P4_pos_y -=  1;
+#                        grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
+#                    elif button.text == ">" and P4_pos_x + 1 < COLS:
+#                        P4_pos_x +=  1;
+#                        grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
+#                    elif button.text == "<" and P4_pos_x > 0:
+#                        P4_pos_x -=  1;
+#                        grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
 
     draw_grid(WIN, grid)
 
