@@ -182,28 +182,28 @@ def draw_score(Score):
     # Player 1
     pygame.draw.rect(WIN, WHITE, (230, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50))
     pygame.draw.rect(WIN, BLACK, (230, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50), 2)
-    ScoreSurface = font.render(str(Score["Player 1"]+1), True, drawing_colors[1])
+    ScoreSurface = font.render(str(Score["Player 1"]), True, drawing_colors[1])
     scoreSize =  ScoreSurface.get_size()
     WIN.blit(ScoreSurface, (230+ int((50-scoreSize[0])/2), HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
 
     # Player 2
     pygame.draw.rect(WIN, WHITE, (440, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50))
     pygame.draw.rect(WIN, BLACK, (440, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50), 2)
-    ScoreSurface = font.render(str(Score["Player 2"] + 1), True, drawing_colors[1])
+    ScoreSurface = font.render(str(Score["Player 2"]), True, drawing_colors[1])
     scoreSize = ScoreSurface.get_size()
     WIN.blit(ScoreSurface, (440 + int((50 - scoreSize[0]) / 2), HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
 
     # Player 3
     pygame.draw.rect(WIN, WHITE, (650, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50))
     pygame.draw.rect(WIN, BLACK, (650, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50), 2)
-    ScoreSurface = font.render(str(Score["Player 3"] + 1), True, drawing_colors[1])
+    ScoreSurface = font.render(str(Score["Player 3"]), True, drawing_colors[1])
     scoreSize = ScoreSurface.get_size()
     WIN.blit(ScoreSurface, (650 + int((50 - scoreSize[0]) / 2), HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
 
     #Player 4
     pygame.draw.rect(WIN, WHITE, (860, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50))
     pygame.draw.rect(WIN, BLACK, (860, HEIGHT - TOOLBAR_HEIGHT / 2 - 25, 50, 50), 2)
-    ScoreSurface = font.render(str(Score["Player 4"] + 1), True, drawing_colors[1])
+    ScoreSurface = font.render(str(Score["Player 4"]), True, drawing_colors[1])
     scoreSize = ScoreSurface.get_size()
     WIN.blit(ScoreSurface, (860 + int((50 - scoreSize[0]) / 2), HEIGHT - TOOLBAR_HEIGHT / 2 - 10))
 
@@ -324,109 +324,210 @@ while run:
 
             # Player 1
             if event.key == pygame.K_s and P1_pos_y + 1 < ROWS:
+                for i in range(5):
+                    if grid[P1_pos_y][P1_pos_x] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
-                print(P1_pos_y)
                 P1_pos_y +=  1
-                print(P1_pos_y)
+
                 if grid[P1_pos_y][P1_pos_x] != drawing_colors[1]:
                     Score["Player 1"] += 1
-                    print(P1_pos_y)
+                    for i in range(5):
+                        if grid[P1_pos_y][P1_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P1_pos_y][P1_pos_x] = drawing_colors_head[1]
             elif event.key == pygame.K_w and P1_pos_y > 0:
+                for i in range(5):
+                    if grid[P1_pos_y][P1_pos_x] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
                 P1_pos_y -=  1
                 if grid[P1_pos_y][P1_pos_x] != drawing_colors[1]:
                     Score["Player 1"] += 1
+                    for i in range(5):
+                        if grid[P1_pos_y][P1_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P1_pos_y][P1_pos_x] = drawing_colors_head[1]
+
             elif event.key == pygame.K_d and P1_pos_x + 1 < COLS:
+                for i in range(5):
+                    if grid[P1_pos_y][P1_pos_x] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
                 P1_pos_x +=  1
                 if grid[P1_pos_y][P1_pos_x] != drawing_colors[1]:
                     Score["Player 1"] += 1
+                    for i in range(5):
+                        if grid[P1_pos_y][P1_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P1_pos_y][P1_pos_x] = drawing_colors_head[1]
+
             elif event.key == pygame.K_a and P1_pos_x > 0:
+                for i in range(5):
+                    if grid[P1_pos_y][P1_pos_x] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P1_pos_y][P1_pos_x] = drawing_colors[1]
                 P1_pos_x -=  1
                 if grid[P1_pos_y][P1_pos_x] != drawing_colors[1]:
                     Score["Player 1"] += 1
+                    for i in range(5):
+                        if grid[P1_pos_y][P1_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P1_pos_y][P1_pos_x] = drawing_colors_head[1]
+
 
             # Player 2
             if event.key == pygame.K_g and P2_pos_y + 1 < ROWS:
+                for i in range(5):
+                    if grid[P2_pos_y][P2_pos_y] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
                 P2_pos_y +=  1
                 if grid[P2_pos_y][P2_pos_x] != drawing_colors[2]:
                     Score["Player 2"] += 1
+                    for i in range(5):
+                        if grid[P2_pos_y][P2_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P2_pos_y][P2_pos_x] = drawing_colors_head[2]
+
             elif event.key == pygame.K_t and P2_pos_y > 0:
+                for i in range(5):
+                    if grid[P2_pos_y][P2_pos_y] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
                 P2_pos_y -=  1
                 if grid[P2_pos_y][P2_pos_x] != drawing_colors[2]:
                     Score["Player 2"] += 1
+                    for i in range(5):
+                        if grid[P2_pos_y][P2_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P2_pos_y][P2_pos_x] = drawing_colors_head[2]
+
             elif event.key == pygame.K_h and P2_pos_x + 1 < COLS:
+                for i in range(5):
+                    if grid[P2_pos_y][P2_pos_y] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
                 P2_pos_x +=  1
                 if grid[P2_pos_y][P2_pos_x] != drawing_colors[2]:
                     Score["Player 2"] += 1
+                    for i in range(5):
+                        if grid[P2_pos_y][P2_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P2_pos_y][P2_pos_x] = drawing_colors_head[2]
+
             elif event.key == pygame.K_f and P2_pos_x > 0:
+                for i in range(5):
+                    if grid[P2_pos_y][P2_pos_y] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P2_pos_y][P2_pos_x] = drawing_colors[2]
                 P2_pos_x -=  1
                 if grid[P2_pos_y][P2_pos_x] != drawing_colors[2]:
                     Score["Player 2"] += 1
+                    for i in range(5):
+                        if grid[P2_pos_y][P2_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P2_pos_y][P2_pos_x] = drawing_colors_head[2]
+
 
             # Player 3
             if event.key == pygame.K_k and P3_pos_y + 1 < ROWS:
+                for i in range(5):
+                    if grid[P3_pos_y][P3_pos_x] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
                 P3_pos_y += 1
                 if grid[P3_pos_y][P3_pos_x] != drawing_colors[3]:
                     Score["Player 3"] += 1
+                    for i in range(5):
+                        if grid[P3_pos_y][P3_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P3_pos_y][P3_pos_x] = drawing_colors_head[3]
             elif event.key == pygame.K_i and P3_pos_y > 0:
+                for i in range(5):
+                    if grid[P3_pos_y][P3_pos_x] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
                 P3_pos_y -=  1
                 if grid[P3_pos_y][P3_pos_x] != drawing_colors[3]:
                     Score["Player 3"] += 1
+                    for i in range(5):
+                        if grid[P3_pos_y][P3_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P3_pos_y][P3_pos_x] = drawing_colors_head[3]
             elif event.key == pygame.K_l and P3_pos_x + 1 < COLS:
+                for i in range(5):
+                    if grid[P3_pos_y][P3_pos_x] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
                 P3_pos_x +=  1
                 if grid[P3_pos_y][P3_pos_x] != drawing_colors[3]:
                     Score["Player 3"] += 1
+                    for i in range(5):
+                        if grid[P3_pos_y][P3_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P3_pos_y][P3_pos_x] = drawing_colors_head[3]
             elif event.key == pygame.K_j and P3_pos_x > 0:
+                for i in range(5):
+                    if grid[P3_pos_y][P3_pos_x] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P3_pos_y][P3_pos_x] = drawing_colors[3]
                 P3_pos_x -=  1
                 if grid[P3_pos_y][P3_pos_x] != drawing_colors[3]:
                     Score["Player 3"] += 1
+                    for i in range(5):
+                        if grid[P3_pos_y][P3_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P3_pos_y][P3_pos_x] = drawing_colors_head[3]
 
             # Player 4
             if event.key == pygame.K_DOWN and P4_pos_y + 1 < ROWS:
+                for i in range(5):
+                    if grid[P4_pos_y][P4_pos_x] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
                 P4_pos_y += 1
                 if grid[P4_pos_y][P4_pos_x] != drawing_colors[4]:
                     Score["Player 4"] += 1
+                    for i in range(5):
+                        if grid[P4_pos_y][P4_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P4_pos_y][P4_pos_x] = drawing_colors_head[4]
             elif event.key == pygame.K_UP and P4_pos_y > 0:
+                for i in range(5):
+                    if grid[P4_pos_y][P4_pos_x] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
                 P4_pos_y -=  1
                 if grid[P4_pos_y][P4_pos_x] != drawing_colors[4]:
                     Score["Player 4"] += 1
+                    for i in range(5):
+                        if grid[P4_pos_y][P4_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P4_pos_y][P4_pos_x] = drawing_colors_head[4]
             elif event.key == pygame.K_RIGHT and P4_pos_x + 1 < COLS:
+                for i in range(5):
+                    if grid[P4_pos_y][P4_pos_x] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
                 P4_pos_x +=  1
                 if grid[P4_pos_y][P4_pos_x] != drawing_colors[4]:
                     Score["Player 4"] += 1
+                    for i in range(5):
+                        if grid[P4_pos_y][P4_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P4_pos_y][P4_pos_x] = drawing_colors_head[4]
             elif event.key == pygame.K_LEFT and P4_pos_x > 0:
+                for i in range(5):
+                    if grid[P4_pos_y][P4_pos_x] == drawing_colors[i]:
+                        Score["Player " + str(i)] -= 1
                 grid[P4_pos_y][P4_pos_x] = drawing_colors[4]
                 P4_pos_x -=  1
                 if grid[P4_pos_y][P4_pos_x] != drawing_colors[4]:
                     Score["Player 4"] += 1
+                    for i in range(5):
+                        if grid[P4_pos_y][P4_pos_x] == drawing_colors[i]:
+                            Score["Player " + str(i)] -= 1
                 grid[P4_pos_y][P4_pos_x] = drawing_colors_head[4]
 
         # draw_Score(Score)
