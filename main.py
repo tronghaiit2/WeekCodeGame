@@ -112,6 +112,7 @@ buttons = [
     Button(390, button_y, 50, 50, YELLOW, "P2"),
     Button(600, button_y, 50, 50, GREEN, "P3"),
     Button(810, button_y, 50, 50, BLUE, "P4"),
+    Button(1180+100, button_y, 50, 50, WHITE, "Erase", BLACK),
     Button(1180, button_y, 50, 50, WHITE, "Clear", BLACK),
     Button(70, 30, 40, 40, ORANGE, "W", BLACK),
     Button(70, 110, 40, 40, ORANGE, "S", BLACK),
@@ -269,7 +270,7 @@ while run:
     count_timer = pygame.time.get_ticks()
     if count_timer - last_count > 1000:
 
-        time -= 1
+        time -= time_minus
         last_count = count_timer
         if time <= 0:
             draw_announce(Score)
@@ -543,7 +544,7 @@ while run:
 
             try:
                 row, col = get_row_col_from_pos(pos)
-                #grid[row][col] = drawing_color
+                grid[row][col-6] = drawing_color
             except IndexError:
 
                 for button in buttons:

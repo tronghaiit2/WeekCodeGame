@@ -31,7 +31,8 @@ BG_COLOR = WHITE
 
 DRAW_GRID_LINES = True
 
-timeDefault = 500
+time_minus = 1
+timeDefault = 20
 countdown = 3
 
 # Setup drawing color
